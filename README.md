@@ -2,6 +2,14 @@
 
 A production-grade, mid-level MERN stack application built with strict **TypeScript**, **Node.js**, **Express**, **MongoDB** (ACID multi-document transactions), and **React** (Vite). 
 
+### 🌐 Live Production Deployments:
+* **Frontend Web Application (Vercel)**: [https://mentor-merlin-frontend.vercel.app](https://mentor-merlin-frontend.vercel.app)
+* **Backend API (Render)**: [https://mentor-merlin-backend.onrender.com](https://mentor-merlin-backend.onrender.com)
+* **API Health Check**: [https://mentor-merlin-backend.onrender.com/api/health](https://mentor-merlin-backend.onrender.com/api/health)
+* **GitHub Repository**: [https://github.com/nidhinkg1/mentor-merlin-fullstack-assessment](https://github.com/nidhinkg1/mentor-merlin-fullstack-assessment)
+
+---
+
 The platform delivers three distinct, role-tailored experiences:
 1. **Guest Booking Experience** (Agoda-inspired commercial hotel booking portal)
 2. **Staff Front Desk Operations** (High-density administrative terminal for arrivals, departures, check-in, and check-out)
