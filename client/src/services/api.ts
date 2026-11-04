@@ -1,5 +1,16 @@
 // Support configurable backend API base URL for multi-domain production deployments
-const API_BASE = (import.meta.env.VITE_API_URL as string) || '/api';
+// Automatically ensures the `/api` prefix is present regardless of trailing slashes
+const getApiBase = (): string => {
+  const envUrl = (import.meta.env.VITE_API_URL as string)?.trim();
+  if (!envUrl) return '/api';
+  const cleanUrl = envUrl.replace(/\/+$/, '');
+  if (!cleanUrl.endsWith('/api')) {
+    return `${cleanUrl}/api`;
+  }
+  return cleanUrl;
+};
+
+const API_BASE = getApiBase();
 
 export class ApiError extends Error {
   public statusCode: number;
