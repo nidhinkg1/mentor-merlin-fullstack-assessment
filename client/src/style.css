@@ -1,0 +1,91 @@
+/* Mentor Merlin Hotel & Resort - Design System & Modern Refined Stylesheet */
+:root {
+  /* Brand Palette */
+  --primary: #294C3A;           /* Deep Forest Green */
+  --primary-hover: #1f3a2c;
+  --primary-light: #f0f4f1;
+  --secondary: #78866B;         /* Muted Olive */
+  --secondary-light: #f4f6f2;
+  --accent: #B18A52;            /* Warm Bronze / Gold */
+  --accent-hover: #9c7642;
+  --accent-light: #faf5ed;
+  
+  /* Surfaces & Neutrals */
+  --bg-main: #F8F7F3;           /* Warm Ivory */
+  --card-bg: #FFFFFF;           /* Crisp White */
+  --text-main: #292D2B;         /* Dark Charcoal */
+  --text-muted: #737873;        /* Muted Grey */
+  --border-color: #E7E6E0;      /* Soft Neutral Border */
+  --border-subtle: #f0eee8;
+
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Radii & Shadows */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --shadow-subtle: 0 1px 3px 0 rgba(41, 45, 43, 0.04), 0 1px 2px -1px rgba(41, 45, 43, 0.04);
+  --shadow-card: 0 4px 6px -1px rgba(41, 45, 43, 0.05), 0 2px 4px -2px rgba(41, 45, 43, 0.03);
+  --shadow-elevated: 0 12px 24px -4px rgba(41, 45, 43, 0.08), 0 4px 6px -2px rgba(41, 45, 43, 0.04);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border-radius: var(--radius-md);
+  transition: all 0.15s ease-in-out;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  background-color: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(41, 76, 58, 0.12);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d2c9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
