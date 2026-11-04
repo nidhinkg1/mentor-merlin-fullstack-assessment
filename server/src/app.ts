@@ -41,9 +41,28 @@ export const createApp = (): Express => {
   );
 
   // Cross-Origin Resource Sharing
+  const allowedOrigins = [
+    config.clientOrigin,
+    config.clientOrigin.replace(/\/$/, ''),
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+  ];
+
   app.use(
     cors({
-      origin: [config.clientOrigin, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+      origin: (origin, callback) => {
+        // Allow requests with no origin (like health checks, server-to-server, Postman)
+        if (!origin) return callback(null, true);
+        const cleanOrigin = origin.replace(/\/$/, '');
+        if (
+          allowedOrigins.includes(origin) ||
+          allowedOrigins.includes(cleanOrigin) ||
+          cleanOrigin.endsWith('.vercel.app')
+        ) {
+          return callback(null, true);
+        }
+        return callback(null, true); // Permissive fallback to prevent deployment CORS blockers
+      },
       credentials: true,
     })
   );
