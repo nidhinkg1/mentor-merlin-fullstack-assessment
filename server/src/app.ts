@@ -50,7 +50,7 @@ export const createApp = (): Express => {
 
   app.use(
     cors({
-      origin: (origin, callback) => {
+      origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
         // Allow requests with no origin (like health checks, server-to-server, Postman)
         if (!origin) return callback(null, true);
         const cleanOrigin = origin.replace(/\/$/, '');

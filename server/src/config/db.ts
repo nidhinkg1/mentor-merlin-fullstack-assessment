@@ -23,6 +23,7 @@ export const connectDatabase = async (): Promise<typeof mongoose> => {
   } catch (error) {
     console.error('[Database] MongoDB connection error:', error);
     process.exit(1);
+    throw error;
   }
 };
 

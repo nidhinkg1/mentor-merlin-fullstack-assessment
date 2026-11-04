@@ -1,9 +1,7 @@
 import dotenv from 'dotenv';
-import path from 'path';
 
-// Load environment variables from server/.env first, then fallback to cwd/.env
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
-dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+// Load environment variables
+dotenv.config();
 
 export interface AppConfig {
   port: number;
