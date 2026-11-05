@@ -131,8 +131,8 @@ export const RoomDiscoveryPage: React.FC = () => {
       <div
         style={{
           position: 'relative',
-          height: '380px',
-          backgroundImage: `linear-gradient(rgba(41, 76, 58, 0.7), rgba(31, 58, 44, 0.85)), url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80")`,
+          minHeight: '340px',
+          backgroundImage: `linear-gradient(rgba(41, 76, 58, 0.72), rgba(31, 58, 44, 0.88)), url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           display: 'flex',
@@ -140,11 +140,11 @@ export const RoomDiscoveryPage: React.FC = () => {
           justifyContent: 'center',
           alignItems: 'center',
           textAlign: 'center',
-          padding: '0 20px',
+          padding: '48px 20px 60px',
           color: '#FFFFFF',
         }}
       >
-        <div style={{ maxWidth: '820px' }}>
+        <div style={{ maxWidth: '820px', width: '100%' }}>
           <div
             style={{
               display: 'inline-block',
@@ -163,35 +163,28 @@ export const RoomDiscoveryPage: React.FC = () => {
           >
             ★ 5-Star Luxury Resort & Residences ★
           </div>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, margin: '0 0 10px', letterSpacing: '-0.03em', color: '#FFFFFF' }}>
+          <h1 className="hero-title">
             Mentor Merlin Hotel & Resort
           </h1>
-          <p style={{ fontSize: '1.0625rem', color: '#E7E6E0', margin: 0, fontWeight: 400, maxWidth: '640px', marginLeft: 'auto', marginRight: 'auto' }}>
+          <p className="hero-subtitle">
             Guaranteed lowest rates, verified real-time room inventory, and instant reservation confirmation.
           </p>
         </div>
       </div>
 
       {/* PROMINENT HORIZONTAL AGODA SEARCH BAR (FLOATING OVER HERO) */}
-      <div style={{ maxWidth: '1200px', margin: '-44px auto 36px', padding: '0 20px', position: 'relative', zIndex: 20 }}>
+      <div className="search-floating-wrapper">
         <div
           style={{
             backgroundColor: '#FFFFFF',
             borderRadius: '8px',
             boxShadow: '0 10px 25px -4px rgba(41, 45, 43, 0.08), 0 4px 6px -2px rgba(41, 45, 43, 0.04)',
             border: '1px solid #E7E6E0',
-            padding: '22px 24px',
+            padding: '20px 24px',
           }}
         >
           <form onSubmit={handleSearch}>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '16px',
-                alignItems: 'flex-end',
-              }}
-            >
+            <div className="search-form-grid">
               <div>
                 <label style={{ display: 'block', fontSize: '0.6875rem', fontWeight: 700, color: '#737873', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px' }}>
                   Check-In
@@ -381,18 +374,10 @@ export const RoomDiscoveryPage: React.FC = () => {
                 {searchResults.map((item) => (
                   <div
                     key={item.roomType._id}
-                    style={{
-                      backgroundColor: '#FFFFFF',
-                      borderRadius: '8px',
-                      border: '1px solid #E7E6E0',
-                      boxShadow: '0 2px 4px rgba(41, 45, 43, 0.04)',
-                      display: 'grid',
-                      gridTemplateColumns: '320px 1fr 240px',
-                      overflow: 'hidden',
-                    }}
+                    className="room-card-responsive"
                   >
                     {/* Left: Real Room Photo */}
-                    <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+                    <div className="room-card-photo-col">
                       <img
                         src={item.roomType.imageUrl || defaultRoomImage}
                         alt={item.roomType.name}
@@ -418,7 +403,7 @@ export const RoomDiscoveryPage: React.FC = () => {
                     </div>
 
                     {/* Center: Details & Amenities */}
-                    <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                       <div>
                         <h3 style={{ fontSize: '1.1875rem', fontWeight: 800, color: '#292D2B', margin: '0 0 6px', letterSpacing: '-0.02em' }}>
                           {item.roomType.name}
@@ -468,29 +453,23 @@ export const RoomDiscoveryPage: React.FC = () => {
                     </div>
 
                     {/* Right: Pricing Box & Action */}
-                    <div
-                      style={{
-                        padding: '20px',
-                        borderLeft: '1px solid #E7E6E0',
-                        backgroundColor: '#F8F7F3',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        textAlign: 'right',
-                      }}
-                    >
-                      <div>
-                        <span style={{ fontSize: '0.6875rem', color: '#737873', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.04em' }}>
-                          Price per night
-                        </span>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#292D2B', marginTop: '2px' }}>
-                          ${item.pricePerNight}
+                    <div className="room-card-pricing-col">
+                      <div className="pricing-row-mobile">
+                        <div>
+                          <span style={{ fontSize: '0.6875rem', color: '#737873', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.04em' }}>
+                            Price per night
+                          </span>
+                          <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#292D2B', marginTop: '2px' }}>
+                            ${item.pricePerNight}
+                          </div>
                         </div>
-                        <div style={{ fontSize: '0.8125rem', color: '#B18A52', fontWeight: 700, marginTop: '4px' }}>
-                          ${item.totalAmount} total for {item.nights} night(s)
-                        </div>
-                        <div style={{ fontSize: '0.6875rem', color: '#737873', marginTop: '2px' }}>
-                          Includes all taxes & resort fees
+                        <div>
+                          <div style={{ fontSize: '0.8125rem', color: '#B18A52', fontWeight: 700 }}>
+                            ${item.totalAmount} total
+                          </div>
+                          <div style={{ fontSize: '0.6875rem', color: '#737873' }}>
+                            for {item.nights} night(s)
+                          </div>
                         </div>
                       </div>
 

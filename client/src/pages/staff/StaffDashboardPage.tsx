@@ -258,7 +258,7 @@ export const StaffDashboardPage: React.FC = () => {
         ) : null}
 
         {/* Tab Navigation */}
-        <div style={{ borderBottom: '1px solid #E7E6E0', marginBottom: '24px', display: 'flex', gap: '8px', overflowX: 'auto' }}>
+        <div className="subnav-tabs" style={{ borderBottom: '1px solid #E7E6E0', marginBottom: '24px' }}>
           <button
             onClick={() => setActiveTab('overview')}
             style={{
@@ -270,6 +270,7 @@ export const StaffDashboardPage: React.FC = () => {
               color: activeTab === 'overview' ? '#294C3A' : '#737873',
               backgroundColor: 'transparent',
               cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
             Operations Overview
@@ -285,6 +286,7 @@ export const StaffDashboardPage: React.FC = () => {
               color: activeTab === 'arrivals' ? '#294C3A' : '#737873',
               backgroundColor: 'transparent',
               cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
             Today's Arrivals ({stats?.todayArrivalsCount || 0})
@@ -300,6 +302,7 @@ export const StaffDashboardPage: React.FC = () => {
               color: activeTab === 'departures' ? '#294C3A' : '#737873',
               backgroundColor: 'transparent',
               cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
             Today's Departures ({stats?.todayDeparturesCount || 0})
@@ -315,6 +318,7 @@ export const StaffDashboardPage: React.FC = () => {
               color: activeTab === 'reservations' ? '#294C3A' : '#737873',
               backgroundColor: 'transparent',
               cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
             Front Desk Master Register
@@ -323,7 +327,7 @@ export const StaffDashboardPage: React.FC = () => {
 
         {/* TAB CONTENT: Overview (Arrivals & Departures Split View) */}
         {activeTab === 'overview' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: '24px' }}>
             {/* Quick Arrivals Panel */}
             <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', border: '1px solid #E7E6E0', padding: '20px', boxShadow: '0 1px 3px rgba(41, 45, 43, 0.03)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -340,7 +344,7 @@ export const StaffDashboardPage: React.FC = () => {
               ) : arrivals.length === 0 ? (
                 <EmptyState title="No Arrivals Scheduled for Today" description="All confirmed guests for today have arrived or no new check-ins are scheduled." />
               ) : (
-                <div style={{ overflowX: 'auto' }}>
+                <div className="table-responsive">
                   <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8125rem', textAlign: 'left' }}>
                     <thead>
                       <tr style={{ borderBottom: '1px solid #E7E6E0', color: '#737873', fontSize: '0.6875rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
@@ -408,7 +412,7 @@ export const StaffDashboardPage: React.FC = () => {
               ) : departures.length === 0 ? (
                 <EmptyState title="No Departures Scheduled for Today" description="No guests are due to check out on today's business date." />
               ) : (
-                <div style={{ overflowX: 'auto' }}>
+                <div className="table-responsive">
                   <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8125rem', textAlign: 'left' }}>
                     <thead>
                       <tr style={{ borderBottom: '1px solid #E7E6E0', color: '#737873', fontSize: '0.6875rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
@@ -595,7 +599,7 @@ export const StaffDashboardPage: React.FC = () => {
                 }}
               />
             ) : (
-              <div style={{ overflowX: 'auto', border: '1px solid #E7E6E0', borderRadius: '6px' }}>
+              <div className="table-responsive" style={{ border: '1px solid #E7E6E0', borderRadius: '6px' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8125rem', textAlign: 'left' }}>
                   <thead style={{ backgroundColor: '#F8F7F3', borderBottom: '1px solid #E7E6E0', color: '#737873', fontSize: '0.6875rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     <tr>

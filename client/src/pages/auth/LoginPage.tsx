@@ -49,17 +49,7 @@ export const LoginPage: React.FC = () => {
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
       }}
     >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '440px',
-          backgroundColor: '#FFFFFF',
-          borderRadius: '8px',
-          padding: '36px',
-          boxShadow: '0 4px 16px rgba(41, 45, 43, 0.05)',
-          border: '1px solid #E7E6E0',
-        }}
-      >
+      <div className="auth-card">
         <div style={{ textAlign: 'center', marginBottom: '28px' }}>
           <span
             style={{

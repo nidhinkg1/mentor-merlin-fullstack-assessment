@@ -236,7 +236,7 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* Sub-Navigation Tabs */}
       <div style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E7E6E0' }}>
-        <div style={{ maxWidth: '1360px', margin: '0 auto', padding: '0 24px', display: 'flex', gap: '24px' }}>
+        <div className="subnav-tabs" style={{ maxWidth: '1360px', margin: '0 auto', padding: '0 20px', gap: '20px' }}>
           {[
             { id: 'overview', label: 'Executive Overview' },
             { id: 'rooms', label: 'Room & Inventory Management' },
@@ -256,6 +256,7 @@ export const AdminDashboardPage: React.FC = () => {
                 fontSize: '0.875rem',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
+                flexShrink: 0,
               }}
             >
               {tab.label}
@@ -366,7 +367,7 @@ export const AdminDashboardPage: React.FC = () => {
                   {resLoading ? (
                     <LoadingSpinner message="Loading audit feed..." />
                   ) : (
-                    <div style={{ overflowX: 'auto' }}>
+                    <div className="table-responsive">
                       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem', textAlign: 'left' }}>
                         <thead>
                           <tr style={{ backgroundColor: '#F8F7F3', borderBottom: '1px solid #E7E6E0', color: '#737873', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -438,7 +439,7 @@ export const AdminDashboardPage: React.FC = () => {
             {roomsLoading ? (
               <LoadingSpinner message="Loading room inventory..." />
             ) : (
-              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', border: '1px solid #E7E6E0', overflow: 'hidden', boxShadow: '0 1px 3px rgba(41, 45, 43, 0.04)' }}>
+              <div className="table-responsive" style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', border: '1px solid #E7E6E0', overflow: 'hidden', boxShadow: '0 1px 3px rgba(41, 45, 43, 0.04)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem', textAlign: 'left' }}>
                   <thead>
                     <tr style={{ backgroundColor: '#F8F7F3', borderBottom: '1px solid #E7E6E0', color: '#737873', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -559,7 +560,7 @@ export const AdminDashboardPage: React.FC = () => {
               </div>
 
               {/* Filters */}
-              <div style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', width: '100%', maxWidth: '420px' }}>
                 <input
                   type="text"
                   placeholder="Search reference, guest or email..."
@@ -574,7 +575,7 @@ export const AdminDashboardPage: React.FC = () => {
                     border: '1px solid #E7E6E0',
                     fontSize: '0.875rem',
                     color: '#292D2B',
-                    width: '260px',
+                    flex: '1 1 200px',
                     backgroundColor: '#FFFFFF',
                   }}
                 />
@@ -606,7 +607,7 @@ export const AdminDashboardPage: React.FC = () => {
             {resLoading ? (
               <LoadingSpinner message="Querying master reservations records..." />
             ) : (
-              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', border: '1px solid #E7E6E0', overflow: 'hidden', boxShadow: '0 1px 3px rgba(41, 45, 43, 0.04)' }}>
+              <div className="table-responsive" style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', border: '1px solid #E7E6E0', overflow: 'hidden', boxShadow: '0 1px 3px rgba(41, 45, 43, 0.04)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem', textAlign: 'left' }}>
                   <thead>
                     <tr style={{ backgroundColor: '#F8F7F3', borderBottom: '1px solid #E7E6E0', color: '#737873', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -723,96 +724,98 @@ export const AdminDashboardPage: React.FC = () => {
       {/* EDIT ROOM MODAL */}
       {editingRoom && (
         <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(41, 76, 58, 0.55)', backdropFilter: 'blur(3px)', zIndex: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', maxWidth: '520px', width: '100%', padding: '28px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)', border: '1px solid #E7E6E0' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#294C3A', marginBottom: '16px', letterSpacing: '-0.02em' }}>
-              Edit Room Type: {editingRoom.name}
-            </h3>
+          <div className="modal-container" style={{ maxWidth: '520px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}>
+            <div className="modal-scroll-body">
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#294C3A', marginBottom: '16px', letterSpacing: '-0.02em' }}>
+                Edit Room Type: {editingRoom.name}
+              </h3>
 
-            <form onSubmit={handleUpdateRoomSubmit}>
-              <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
-                  Room Category Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={editForm.name || ''}
-                  onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                  style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
-                />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '14px' }}>
-                <div>
+              <form onSubmit={handleUpdateRoomSubmit}>
+                <div style={{ marginBottom: '14px' }}>
                   <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
-                    Price Per Night ($)
+                    Room Category Name
                   </label>
                   <input
-                    type="number"
-                    min={1}
+                    type="text"
                     required
-                    value={editForm.pricePerNight ?? 100}
-                    onChange={(e) => setEditForm({ ...editForm, pricePerNight: Number(e.target.value) })}
+                    value={editForm.name || ''}
+                    onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
                     style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
                   />
                 </div>
-                <div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '12px', marginBottom: '14px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
+                      Price Per Night ($)
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      required
+                      value={editForm.pricePerNight ?? 100}
+                      onChange={(e) => setEditForm({ ...editForm, pricePerNight: Number(e.target.value) })}
+                      style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
+                      Total Units (Inventory)
+                    </label>
+                    <input
+                      type="number"
+                      min={0}
+                      required
+                      value={editForm.totalInventory ?? 1}
+                      onChange={(e) => setEditForm({ ...editForm, totalInventory: Number(e.target.value) })}
+                      style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ marginBottom: '14px' }}>
                   <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
-                    Total Units (Inventory)
+                    Description
+                  </label>
+                  <textarea
+                    rows={3}
+                    required
+                    value={editForm.description || ''}
+                    onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                    style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', resize: 'vertical', color: '#292D2B' }}
+                  />
+                </div>
+
+                <div style={{ marginBottom: '18px' }}>
+                  <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
+                    Image URL (High-Resolution Photography)
                   </label>
                   <input
-                    type="number"
-                    min={0}
-                    required
-                    value={editForm.totalInventory ?? 1}
-                    onChange={(e) => setEditForm({ ...editForm, totalInventory: Number(e.target.value) })}
+                    type="url"
+                    value={editForm.imageUrl || ''}
+                    onChange={(e) => setEditForm({ ...editForm, imageUrl: e.target.value })}
                     style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
                   />
                 </div>
-              </div>
 
-              <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
-                  Description
-                </label>
-                <textarea
-                  rows={3}
-                  required
-                  value={editForm.description || ''}
-                  onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
-                  style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', resize: 'vertical', color: '#292D2B' }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '18px' }}>
-                <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
-                  Image URL (High-Resolution Photography)
-                </label>
-                <input
-                  type="url"
-                  value={editForm.imageUrl || ''}
-                  onChange={(e) => setEditForm({ ...editForm, imageUrl: e.target.value })}
-                  style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
-                />
-              </div>
-
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <button
-                  type="button"
-                  onClick={() => setEditingRoom(null)}
-                  style={{ flex: 1, padding: '10px', backgroundColor: '#F8F7F3', color: '#737873', border: '1px solid #E7E6E0', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={actionLoading}
-                  style={{ flex: 1, padding: '10px', backgroundColor: '#294C3A', color: '#FFFFFF', border: 'none', borderRadius: '6px', fontWeight: 700, cursor: actionLoading ? 'not-allowed' : 'pointer' }}
-                >
-                  {actionLoading ? 'Saving...' : 'Save Changes'}
-                </button>
-              </div>
-            </form>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setEditingRoom(null)}
+                    style={{ flex: 1, padding: '10px', backgroundColor: '#F8F7F3', color: '#737873', border: '1px solid #E7E6E0', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={actionLoading}
+                    style={{ flex: 1, padding: '10px', backgroundColor: '#294C3A', color: '#FFFFFF', border: 'none', borderRadius: '6px', fontWeight: 700, cursor: actionLoading ? 'not-allowed' : 'pointer' }}
+                  >
+                    {actionLoading ? 'Saving...' : 'Save Changes'}
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}
@@ -820,40 +823,41 @@ export const AdminDashboardPage: React.FC = () => {
       {/* CREATE ROOM MODAL */}
       {isCreateModalOpen && (
         <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(41, 76, 58, 0.55)', backdropFilter: 'blur(3px)', zIndex: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '8px', maxWidth: '520px', width: '100%', padding: '28px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)', border: '1px solid #E7E6E0' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#294C3A', marginBottom: '16px', letterSpacing: '-0.02em' }}>
-              Add New Hotel Room Category
-            </h3>
+          <div className="modal-container" style={{ maxWidth: '520px', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}>
+            <div className="modal-scroll-body">
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#294C3A', marginBottom: '16px', letterSpacing: '-0.02em' }}>
+                Add New Hotel Room Category
+              </h3>
 
-            <form onSubmit={handleCreateRoomSubmit}>
-              <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
-                  Room Category Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Oceanfront Premier Suite"
-                  value={newRoom.name}
-                  onChange={(e) => setNewRoom({ ...newRoom, name: e.target.value })}
-                  style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
-                />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginBottom: '14px' }}>
-                <div>
+              <form onSubmit={handleCreateRoomSubmit}>
+                <div style={{ marginBottom: '14px' }}>
                   <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
-                    Capacity
+                    Room Category Name
                   </label>
                   <input
-                    type="number"
-                    min={1}
+                    type="text"
                     required
-                    value={newRoom.capacity}
-                    onChange={(e) => setNewRoom({ ...newRoom, capacity: Number(e.target.value) })}
+                    placeholder="e.g. Oceanfront Premier Suite"
+                    value={newRoom.name}
+                    onChange={(e) => setNewRoom({ ...newRoom, name: e.target.value })}
                     style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
                   />
                 </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '10px', marginBottom: '14px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
+                      Capacity
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      required
+                      value={newRoom.capacity}
+                      onChange={(e) => setNewRoom({ ...newRoom, capacity: Number(e.target.value) })}
+                      style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid #E7E6E0', fontSize: '0.875rem', boxSizing: 'border-box', color: '#292D2B' }}
+                    />
+                  </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#292D2B', marginBottom: '4px' }}>
                     Price / Night ($)
@@ -928,7 +932,8 @@ export const AdminDashboardPage: React.FC = () => {
             </form>
           </div>
         </div>
-      )}
+      </div>
+    )}
     </div>
   );
 };

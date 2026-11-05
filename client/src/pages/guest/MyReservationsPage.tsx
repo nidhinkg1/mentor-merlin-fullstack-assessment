@@ -390,14 +390,11 @@ export const MyReservationsPage: React.FC = () => {
             }}
           >
             <div
+              className="modal-container"
               style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: '8px',
                 maxWidth: '460px',
-                width: '100%',
                 padding: '24px',
                 boxShadow: '0 20px 25px -5px rgba(41, 45, 43, 0.1)',
-                border: '1px solid #E7E6E0',
               }}
             >
               <div style={{ textAlign: 'center', marginBottom: '16px' }}>

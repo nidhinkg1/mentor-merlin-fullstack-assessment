@@ -122,21 +122,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '16px',
-        overflowY: 'auto',
       }}
       onClick={(e) => {
         if (e.target === e.currentTarget) handleModalClose();
       }}
     >
       <div
+        className="modal-container"
         style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '8px',
-          maxWidth: '540px',
-          width: '100%',
           boxShadow: '0 20px 25px -5px rgba(41, 45, 43, 0.15)',
-          overflow: 'hidden',
-          border: '1px solid #E7E6E0',
         }}
       >
         {/* Header: Refined Deep Forest Green */}
@@ -144,10 +138,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           style={{
             backgroundColor: '#294C3A',
             color: '#FFFFFF',
-            padding: '20px 24px',
+            padding: '18px 20px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            flexShrink: 0,
           }}
         >
           <div>
@@ -176,7 +171,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         </div>
 
         {/* Content Body */}
-        <div style={{ padding: '24px' }}>
+        <div className="modal-scroll-body">
           {confirmedReservation ? (
             /* Confirmation Screen */
             <div style={{ textAlign: 'center' }}>
